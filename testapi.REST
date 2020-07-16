@@ -1,0 +1,29 @@
+GET http://localhost:5002/api/user
+
+
+###
+
+GET http://localhost:5002/api/DC_CAGE/?location=123&site=1234
+
+###
+
+GET https://s12760.poc-dev.kubix.tm/api/DC_CAGE/?location=123&site=1234
+
+###
+GET http://localhost:5005/api/location
+
+###
+
+GET http://localhost:5002/api/DC_CAGE/?location=123&site=1234
+
+###
+
+GET http://localhost:5002/test
+
+
+###
+
+https://10.54.5.141:3443/claritybqm/reportFetch/?scriptName=DC_USER&userid=DCOADMIN
+
+###
+http://localhost
