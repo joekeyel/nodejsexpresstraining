@@ -81,7 +81,7 @@ tunnel(config, function (error, server) {
     console.log(error.message);
   }
 
-  console.log("tunnel")
+  console.log("tunnel connected")
 
 
 
