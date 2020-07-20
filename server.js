@@ -95,6 +95,17 @@ require('./dcportalapi/inventory/DC_CRAC')(app);
 require('./dcportalapi/inventory/DC_DASHBOARD_INFO')(app);
 require('./dcportalapi/inventory/DC_NETWORK_BANDWIDTH')(app);
 require('./dcportalapi/inventory/DC_NETWORK_PORT')(app);
+require('./dcportalapi/inventory/DC_PDU')(app);
+require('./dcportalapi/inventory/DC_RACK')(app);
+require('./dcportalapi/inventory/DC_SITE')(app);
+require('./dcportalapi/inventory/DC_UPS')(app);
+
+require('./dcportalapi/inventory/create/DC_CRAC_CREATE')(app);
+require('./dcportalapi/inventory/create/DC_LOCATION_CREATE')(app);
+require('./dcportalapi/inventory/create/DC_NETWORK_BANDWIDTH_CREATE')(app);
+require('./dcportalapi/inventory/create/DC_NETWORK_PORT_CREATE')(app);
+
+
 
 
 require('./dcportalapi/DC_USER')(app);
@@ -116,6 +127,6 @@ require('./dcportalapi/DC_PENDING_APPROVAL')(app);
   });
 
 
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 5004;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
