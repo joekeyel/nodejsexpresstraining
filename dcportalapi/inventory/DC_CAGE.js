@@ -1,12 +1,15 @@
+const authorizeToken = require('../../authorizeToken')
 const oracledb = require('oracledb');
-var password = 'Tm1m5u5R' 
+//require('dotenv').config()
+
+var password = process.env.oraclePwd 
+
 
 module.exports = function (app) {
 
-
+ 
   
-  
-    const dc_cage = app.get('/api/DC_CAGE/',(req,res)=>{
+    const dc_cage = app.get('/api/DC_CAGE/',authorizeToken,(req,res)=>{
 
         let location = req.query.location
         let site  = req.query.site

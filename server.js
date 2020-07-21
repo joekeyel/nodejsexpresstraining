@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan  = require('morgan')
 const path = require('path');
+require('dotenv').config()
 
 const app = express();
 app.use(morgan('combined'))
@@ -89,6 +90,25 @@ tunnel(config, function (error, server) {
 });
 
 //api dc_cage
+const jwt = require('jsonwebtoken')
+
+app.use(express.json())
+
+
+  app.post('/login', (req, res) => {
+    // Authenticate User LDAP Here
+
+
+    //After authentichate success give authorization here
+  
+    const username = req.body.username
+    const user = { name: username }
+  
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+  
+    res.json({ accessToken: accessToken })
+  })
+
 
 require('./dcportalapi/inventory/DC_CAGE')(app);
 require('./dcportalapi/inventory/DC_CRAC')(app);
@@ -119,12 +139,25 @@ require('./dcportalapi/DC_MASTERLIST')(app);
 require('./dcportalapi/DC_PENDING_APPROVAL')(app);
 
 
+
+// serve up production assets
+//app.use(express.static('build'));
+// app.use(app.router);
+app.use(express.static(__dirname + '/build'));
+// let the react app to handle any unknown routes 
+// serve up the index.html if express does'nt recognize the route
+app.get('/*', function(req, res, next){ 
+  res.setHeader('Last-Modified', (new Date()).toUTCString());
+  next(); 
+});
+
+
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
+ // app.use(express.static(path.join(__dirname, 'client/build')));
   // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
+  // app.get('*', function(req, res) {
+  //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  // });
 
 
 const PORT = process.env.PORT || 5004;
