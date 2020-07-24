@@ -139,6 +139,24 @@ require('./dcportalapi/inventory/create/DC_RACK_CREATE')(app);
 require('./dcportalapi/inventory/create/DC_SITE_CREATE')(app);
 require('./dcportalapi/inventory/create/DC_UPS_CREATE')(app);
 
+require('./dcportalapi/inventory/delete/DC_CRACK_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_LOCATION_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_NETWORK_BANDWIDTH_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_NETWORK_PORT_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_PDU_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_RACK_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_SITE_DELETE')(app);
+require('./dcportalapi/inventory/delete/DC_UPS_DELETE')(app);
+
+require('./dcportalapi/inventory/update/DC_CRACK_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_LOCATION_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_NETWORK_BANDWIDTH_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_NETWORK_PORT_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_PDU_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_RACK_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_SITE_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_UPS_UPDATE')(app);
+
 
 
 
