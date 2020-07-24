@@ -10,9 +10,8 @@ module.exports = function (app) {
       userId = req.query.userid
       
     
-
       if (userId != null) {
-        query1=" where dcu_id='"+userId+"'";
+        query1=" where id='"+userId+"'";
         }else{
           query1="";
         };
@@ -34,6 +33,7 @@ module.exports = function (app) {
         }else{
           query4="";
         };
+          
 
 
         async function makeConnection() {
@@ -72,12 +72,12 @@ module.exports = function (app) {
 
                 var query3p = connection.execute(
                   `SELECT  r.ur_dcu_id,c.rt_name as rights FROM DC_USER_rights r, dc_rights c
-                  where r.ur_rt_id=c.rt_id  `+ query3,
+                  where r.ur_rt_id=c.rt_id `+ query3,
                   []); 
 
                   var query4p = connection.execute(
                     `SELECT  C.WG_NAME as workgroups FROM DC_USER_workgroup r, dc_workgroup c
-                    where r.uw_wg_id=c.wg_id   `+ query4,
+                    where r.uw_wg_id=c.wg_id `+ query4,
                     []); 
 
                 Promise.join(query1p, query2p, query3p, query4p).spread(function (result, result2, result3, result4){
@@ -106,6 +106,8 @@ module.exports = function (app) {
                   console.log(err.message);
                   //return connection.close();
                 });
+
+
              
               }
               

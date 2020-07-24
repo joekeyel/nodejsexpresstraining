@@ -31,7 +31,7 @@ async function makeConnection() {
     connection = await oracledb.getConnection({
         user: "TMIMS",
         password: password,
-        connectString: "127.0.0.1:1527/BQMDEV"
+        connectString: "127.0.0.1:1521/BQMDEV"
     });
     console.log('connected to database');
   } catch (err) {
@@ -92,7 +92,7 @@ tunnel(config, function (error, server) {
 
 
 
-  //....
+  
 });
 
 
@@ -103,22 +103,34 @@ tunnel(config, function (error, server) {
 //api dc_cage
 const jwt = require('jsonwebtoken')
 
-app.use(express.json())
+//app.use(express.json())
 
 
-  app.post('/login', (req, res) => {
-    // Authenticate User LDAP Here
+  // app.post('/login', (req, res) => {
+  //   // Authenticate User LDAP Here
 
 
-    //After authentichate success give authorization here
+  //   //After authentichate success give authorization here
   
-    const username = req.body.username
-    const user = { name: username }
+  //   const username = req.body.username
+  //   const user = { name: username }
   
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+  //   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
   
-    res.json({ accessToken: accessToken })
-  })
+  //   res.json({ accessToken: accessToken })
+  // })
+
+
+  // serve up production assets
+//app.use(express.static('build'));
+// app.use(app.router);
+app.use(express.static(__dirname + '/build'));
+// let the react app to handle any unknown routes 
+// serve up the index.html if express does'nt recognize the route
+app.get('/*', function(req, res, next){ 
+  res.setHeader('Last-Modified', (new Date()).toUTCString());
+  next(); 
+});
 
 
 require('./dcportalapi/inventory/DC_CAGE')(app);
@@ -130,6 +142,9 @@ require('./dcportalapi/inventory/DC_PDU')(app);
 require('./dcportalapi/inventory/DC_RACK')(app);
 require('./dcportalapi/inventory/DC_SITE')(app);
 require('./dcportalapi/inventory/DC_UPS')(app);
+
+//test
+
 
 require('./dcportalapi/inventory/create/DC_CRAC_CREATE')(app);
 require('./dcportalapi/inventory/create/DC_LOCATION_CREATE')(app);
@@ -148,7 +163,7 @@ require('./dcportalapi/inventory/delete/DC_RACK_DELETE')(app);
 require('./dcportalapi/inventory/delete/DC_SITE_DELETE')(app);
 require('./dcportalapi/inventory/delete/DC_UPS_DELETE')(app);
 
-require('./dcportalapi/inventory/update/DC_CRACK_UPDATE')(app);
+require('./dcportalapi/inventory/update/DC_CRAC_UPDATE')(app);
 require('./dcportalapi/inventory/update/DC_LOCATION_UPDATE')(app);
 require('./dcportalapi/inventory/update/DC_NETWORK_BANDWIDTH_UPDATE')(app);
 require('./dcportalapi/inventory/update/DC_NETWORK_PORT_UPDATE')(app);
@@ -161,6 +176,7 @@ require('./dcportalapi/inventory/update/DC_UPS_UPDATE')(app);
 
 
 require('./dcportalapi/DC_USER')(app);
+require('./dcportalapi/DC_LOV')(app);
 
 require('./dcportalapi/DC_NE_UTILIZATION')(app);
 
@@ -172,16 +188,7 @@ require('./dcportalapi/DC_PENDING_APPROVAL')(app);
 
 
 
-// serve up production assets
-//app.use(express.static('build'));
-// app.use(app.router);
-app.use(express.static(__dirname + '/build'));
-// let the react app to handle any unknown routes 
-// serve up the index.html if express does'nt recognize the route
-app.get('/*', function(req, res, next){ 
-  res.setHeader('Last-Modified', (new Date()).toUTCString());
-  next(); 
-});
+
 
 
   // Serve any static files
