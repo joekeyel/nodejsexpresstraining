@@ -20,47 +20,53 @@ try {
   process.exit(1);
 }
 
+
+
+
+const callapi = app.get('/api/testuser',(req,res)=>{
   
 
-// async function makeConnection() {
-//   try {
-//     connection = await oracledb.getConnection({
-//         user: "TMIMS",
-//         password: password,
-//         connectString: "127.0.0.1:1527/BQMDEV"
-//     });
-//     console.log('connected to database');
-//   } catch (err) {
-//     console.error(err.message);
-//   } finally {
-//     if (connection) {
-//       // try {
-//       //   // Always close connections
-//       //   await connection.close(); 
-//       //   console.log('close connection success');
-//       // } catch (err) {
-//       //   console.error(err.message);
-//       // }
+async function makeConnection() {
+  try {
+    connection = await oracledb.getConnection({
+        user: "TMIMS",
+        password: password,
+        connectString: "127.0.0.1:1527/BQMDEV"
+    });
+    console.log('connected to database');
+  } catch (err) {
+    console.error(err.message);
+  } finally {
+    if (connection) {
+      // try {
+      //   // Always close connections
+      //   await connection.close(); 
+      //   console.log('close connection success');
+      // } catch (err) {
+      //   console.error(err.message);
+      // }
 
-//       connection.execute(
-//         `SELECT *
-//          FROM DC_LOCATION`,
-//         [],  
-//        function(err, result) {
-//           if (err) {
-//             console.error(err.message);
-//             return;
-//           }
-//           console.log(result.rows);
-//        });
+      connection.execute(
+        `SELECT *
+         FROM DC_LOCATION`,
+        [],  
+       function(err, result) {
+          if (err) {
+            console.error(err.message);
+            return;
+          }
+          console.log(result.rows);
+       });
   
-//     }
-//   }
+    }
+  }
 
   
   
 
-// }
+}
+
+})
 
 //jump host for nice database
 
@@ -88,6 +94,11 @@ tunnel(config, function (error, server) {
 
   //....
 });
+
+
+//call api dc user table
+
+
 
 //api dc_cage
 const jwt = require('jsonwebtoken')
@@ -124,6 +135,9 @@ require('./dcportalapi/inventory/create/DC_CRAC_CREATE')(app);
 require('./dcportalapi/inventory/create/DC_LOCATION_CREATE')(app);
 require('./dcportalapi/inventory/create/DC_NETWORK_BANDWIDTH_CREATE')(app);
 require('./dcportalapi/inventory/create/DC_NETWORK_PORT_CREATE')(app);
+require('./dcportalapi/inventory/create/DC_RACK_CREATE')(app);
+require('./dcportalapi/inventory/create/DC_SITE_CREATE')(app);
+require('./dcportalapi/inventory/create/DC_UPS_CREATE')(app);
 
 
 

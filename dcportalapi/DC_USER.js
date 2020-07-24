@@ -5,7 +5,7 @@ var password = 'Tm1m5u5R'
 module.exports = function (app) {
   
 
-    const callapi = app.get('/api/user',(req,res)=>{
+    const callapi = app.get('/api/DC_USER',(req,res)=>{
 
       userId = req.query.userid
       
